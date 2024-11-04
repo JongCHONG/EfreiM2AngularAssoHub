@@ -1,0 +1,29 @@
+<form
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()"
+  class="container mt-5 p-4 border rounded shadow-sm bg-light"
+  style="max-width: 300px"
+>
+  <div class="mb-3">
+    <label for="email" class="form-label fw-bold">Email:</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      required
+      class="form-control"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label fw-bold">Mot de passe:</label>
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      required
+      class="form-control"
+    />
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <button type="submit" class="btn btn-primary w-100">Connexion</button>
+</form>
