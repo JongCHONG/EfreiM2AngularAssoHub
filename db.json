@@ -6,5 +6,39 @@
       "email": "jong@test.com",
       "password": "jong"
     }
+  ],
+  "contacts": [
+    {
+      "id": "c718",
+      "title": "Jong",
+      "email": "jong@mavoie.org",
+      "category_id": "cat718",
+      "user_Id": "b718"
+    },
+    {
+      "id": "c719",
+      "title": "Paul",
+      "email": "paul@test.com",
+      "category_id": "cat718",
+      "user_Id": "b718"
+
+    },
+    {
+      "id": "c720",
+      "title": "Resto du coeur",
+      "email": "restoducoeur@test.com",
+      "category_id": "cat719",
+      "user_Id": "b718"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat718",
+      "category_name": "Amis"
+    },
+    {
+      "id": "cat719",
+      "category_name": "Association"
+    }
   ]
 }
