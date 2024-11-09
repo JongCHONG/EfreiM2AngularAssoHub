@@ -27,7 +27,6 @@
       "email": "paul@test.com",
       "category_id": "cat718",
       "user_Id": "b718"
-
     },
     {
       "id": "c720",
@@ -35,16 +34,30 @@
       "email": "restoducoeur@test.com",
       "category_id": "cat719",
       "user_Id": "b718"
+    },
+    {
+      "id": "c721",
+      "title": "Lili",
+      "email": "lili@test.fr",
+      "category_id": "cat718",
+      "user_Id": "921f"
+    },
+    {
+      "id": "c722",
+      "title": "SPA",
+      "email": "spa@test.fr",
+      "category_id": "cat719",
+      "user_Id": "921f"
     }
   ],
   "categories": [
     {
       "id": "cat718",
-      "category_name": "Amis"
+      "category_name": "Membres"
     },
     {
       "id": "cat719",
-      "category_name": "Association"
+      "category_name": "Partenaires"
     }
   ]
 }
