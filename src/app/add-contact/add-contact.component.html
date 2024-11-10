@@ -1,0 +1,19 @@
+<div class="col-4">
+    <form [formGroup]="addContact" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="title">Dénomination : </label>
+            <input type="text" id="title" placeholder="Prénom ou Dénomination du contact" formControlName="title">
+            <div *ngIf="addContact.get('title')?.invalid && addContact.get('title')?.touched">
+                Le prénom ou la dénomination du contact est requis.
+            </div>
+        </div>
+        <div>
+            <label for="email">Email : </label>
+            <input type="text" id="email" placeholder="Email du contact" formControlName="email">
+            <div *ngIf="addContact.get('email')?.invalid && addContact.get('email')?.touched">
+                L'email du contact est requis.
+            </div>
+        </div>
+        <button type="submit" [disabled]="addContact.invalid">Ajouter</button>
+    </form>
+</div>

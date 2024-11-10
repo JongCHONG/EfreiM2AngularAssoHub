@@ -40,7 +40,10 @@ export class DashboardComponent implements OnInit {
           (cat) => cat.id === contact.category_id
         );
 
-        return { ...contact, category };
+        return {
+          ...contact,
+          category: category ? category : 'Non spécifié',
+        };
       });
     });
   }

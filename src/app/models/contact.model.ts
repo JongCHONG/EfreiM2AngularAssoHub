@@ -1,9 +1,9 @@
 export interface Contact {
-  id: string;
+  id?: string;
   title: string;
   email: string;
   category_id: string;
-  user_id: string;
+  user_Id: string;
   category?: Category;
 }
 
