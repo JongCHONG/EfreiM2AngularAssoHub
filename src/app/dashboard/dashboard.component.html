@@ -6,7 +6,7 @@
 
   <h5 class="mb-4 text-muted">Liste des contacts</h5>
 
-  <div class="row">
+  <div class="row" *ngIf="contacts.length > 0; else emptyContactList">
     <div *ngFor="let contact of contacts">
       <div class="card shadow-sm">
         <div class="card-body">
@@ -22,5 +22,9 @@
       </div>
     </div>
   </div>
+
+  <ng-template #emptyContactList>
+    <p>Votre liste de contact est vide ...</p>
+  </ng-template>
 
 </div>

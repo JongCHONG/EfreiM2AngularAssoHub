@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from '../services/dashboard.service';
 import { forkJoin } from 'rxjs';
 
@@ -32,7 +31,7 @@ export class DashboardComponent implements OnInit {
     const userId = this.userId;
 
     forkJoin({
-      contacts: this.dashboardService.getContactsByUser(userId!),
+      contacts: this.dashboardService.getContactsByUserId(userId!),
       categories: this.dashboardService.getCategories(),
     }).subscribe(({ contacts, categories }) => {
       this.contacts = contacts.map((contact) => {
