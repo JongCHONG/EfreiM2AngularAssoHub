@@ -19,4 +19,9 @@ export class DashboardService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrlCategories}`);
   }
+
+  deleteContact(contactId: string): Observable<void> {
+    const url = `${this.apiUrlContact}/${contactId}`;
+    return this.http.delete<void>(url);
+  }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DashboardService } from '../services/dashboard.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -13,6 +12,8 @@ export class DashboardComponent implements OnInit {
   username: string | null = null;
   userId: string | null = null;
   contacts: any[] = [];
+  sortColumn: string = '';
+  sortAscending: boolean = true;
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -43,5 +44,18 @@ export class DashboardComponent implements OnInit {
         return { ...contact, category };
       });
     });
+  }
+
+  toggleSort(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = column;
+      this.sortAscending = true;
+    }
+  }
+
+  onContactDeleted(): void {
+    this.getContacts();
   }
 }
