@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   userId: string | null = null;
   contacts: Contact[] = [];
   categories: Category[] = [];
+  groupedContacts: Map<string, Contact[]> = new Map();
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -37,15 +38,19 @@ export class DashboardComponent implements OnInit {
       contacts: this.dashboardService.getContactsByUserId(userId!),
       categories: this.dashboardService.getCategories(),
     }).subscribe(({ contacts, categories }) => {
-      this.contacts = contacts.map((contact) => {
+      this.groupedContacts.clear();
+      contacts.forEach((contact) => {
         const category = categories.find(
           (cat) => cat.id === contact.category_id
-        );
+        ) || { id: '', category_name: 'Autre' };
 
-        return {
-          ...contact,
-          category: category ? category : { id: '', category_name: 'Autre' },
-        };
+        contact.category = category;
+
+        const categoryName = contact.category.category_name;
+        if (!this.groupedContacts.has(categoryName)) {
+          this.groupedContacts.set(categoryName, []);
+        }
+        this.groupedContacts.get(categoryName)?.push(contact);
       });
     });
   }

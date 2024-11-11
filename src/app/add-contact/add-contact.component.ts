@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DashboardService } from '../services/dashboard.service';
 import { Contact } from '../models/contact.model';
@@ -12,6 +12,7 @@ import { Category } from '../models/category.model';
 export class AddContactComponent {
   addContact: FormGroup;
   categories: Category[] = [];
+  @Output() contactAdded = new EventEmitter<Contact>();
 
   constructor(private dashboardService: DashboardService) {
     this.addContact = new FormGroup({
@@ -41,6 +42,7 @@ export class AddContactComponent {
       this.dashboardService.addContact(newContact).subscribe(
         (response) => {
           console.log('Contact ajouté avec succès', response);
+          this.contactAdded.emit(response);
           this.addContact.reset({ category_id: '' });
         },
         (error) => {
