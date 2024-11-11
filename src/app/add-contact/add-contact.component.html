@@ -14,6 +14,14 @@
                 L'email du contact est requis.
             </div>
         </div>
+        <div>
+            <label for="category">Catégories</label>
+            <select name="category" id="category_id" formControlName="category_id">
+                <option *ngFor="let category  of categories" [value]="category.id">
+                    {{ category.category_name }}
+                </option>
+            </select>
+        </div>
         <button type="submit" [disabled]="addContact.invalid">Ajouter</button>
     </form>
 </div>

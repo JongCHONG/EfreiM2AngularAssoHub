@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from '../services/dashboard.service';
 import { forkJoin } from 'rxjs';
+import { Contact } from '../models/contact.model';
+import { Category } from '../models/category.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ export class DashboardComponent implements OnInit {
   errorMessage: string | null = null;
   username: string | null = null;
   userId: string | null = null;
-  contacts: any[] = [];
+  contacts: Contact[] = [];
+  categories: Category[] = [];
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -32,7 +34,7 @@ export class DashboardComponent implements OnInit {
     const userId = this.userId;
 
     forkJoin({
-      contacts: this.dashboardService.getContactsByUser(userId!),
+      contacts: this.dashboardService.getContactsByUserId(userId!),
       categories: this.dashboardService.getCategories(),
     }).subscribe(({ contacts, categories }) => {
       this.contacts = contacts.map((contact) => {
@@ -42,7 +44,7 @@ export class DashboardComponent implements OnInit {
 
         return {
           ...contact,
-          category: category ? category : 'Non spécifié',
+          category: category ? category : { id: '', category_name: 'Autre' },
         };
       });
     });

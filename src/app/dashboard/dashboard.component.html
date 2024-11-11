@@ -8,7 +8,7 @@
 
   <app-add-contact></app-add-contact>
 
-  <div class="row">
+  <div class="row" *ngIf="contacts.length > 0; else emptyContactList">
     <div *ngFor="let contact of contacts">
       <div class="card shadow-sm">
         <div class="card-body">
@@ -16,7 +16,8 @@
           <ul class="list-unstyled">
             <li class="mb-2" *ngIf="contact.category?.category_name !== 'Partenaires'">Prénom : {{ contact.title }}
             </li>
-            <li class="mb-2" *ngIf="contact.category?.category_name === 'Partenaires'">Dénomination : {{ contact.title
+            <li class="mb-2" *ngIf="contact.category?.category_name === 'Partenaires'">Dénomination : {{
+              contact.title
               }}
             </li>
             <li class="mb-2">Email : {{ contact.email }}</li>
@@ -25,5 +26,9 @@
       </div>
     </div>
   </div>
+
+  <ng-template #emptyContactList>
+    <p>Votre liste de contact est vide ...</p>
+  </ng-template>
 
 </div>

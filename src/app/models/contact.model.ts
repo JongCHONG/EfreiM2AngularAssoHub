@@ -1,3 +1,5 @@
+import { Category } from './category.model';
+
 export interface Contact {
   id?: string;
   title: string;
@@ -5,9 +7,4 @@ export interface Contact {
   category_id: string;
   user_Id: string;
   category?: Category;
-}
-
-export interface Category {
-  id: string;
-  category_nma: string;
 }
