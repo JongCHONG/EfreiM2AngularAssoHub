@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     const userId = this.userId;
 
     forkJoin({
-      contacts: this.dashboardService.getContactsByUser(userId!),
+      contacts: this.dashboardService.getContactsByUserId(userId!),
       categories: this.dashboardService.getCategories(),
     }).subscribe(({ contacts, categories }) => {
       this.contacts = contacts.map((contact) => {
