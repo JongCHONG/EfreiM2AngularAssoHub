@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Contact } from '../models/contact.model';
-import { Category } from '../models/category.model';
+import { Contact } from 'src/app/models/contact.model';
+import { Category } from 'src/app/models/category.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,5 +28,10 @@ export class DashboardService {
 
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.apiUrlCategories}`);
+  }
+
+  deleteContact(contactId: string): Observable<void> {
+    const url = `${this.apiUrlContact}/${contactId}`;
+    return this.http.delete<void>(url);
   }
 }

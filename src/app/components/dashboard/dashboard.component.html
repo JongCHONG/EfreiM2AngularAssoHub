@@ -1,0 +1,42 @@
+<div class="container" style="width: 80%">
+  <div class="d-flex justify-content-between mb-3">
+    <h1>Bienvenue, {{ username }}</h1>
+    <button (click)="logout()" class="btn btn-primary">Deconnexion</button>
+  </div>
+
+  <h5 class="mb-4 text-muted">Liste des contacts</h5>
+
+  <app-add-contact></app-add-contact>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col" (click)="toggleSort('category_id')">Catégorie</th>
+        <th scope="col" (click)="toggleSort('title')">Prénom/Dénomination</th>
+        <th scope="col" (click)="toggleSort('email')">Email</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="contacts.length > 0; else emptyContactList">
+      <tr *ngFor="
+          let contact of contacts | sortContacts : sortColumn : sortAscending
+        " class="align-middle">
+        <td>{{ contact.category.category_name }}</td>
+        <td>
+          {{ contact.title }}
+        </td>
+        <td>{{ contact.email }}</td>
+        <td>
+          <button class="btn btn-primary me-3">Modifier</button>
+          <button class="btn btn-danger" [appDeleteContact]="contact.id" (contactDeleted)="onContactDeleted()">
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #emptyContactList>
+    <p class="text-center">Votre liste de contact est vide ...</p>
+  </ng-template>
+</div>

@@ -2,7 +2,7 @@
   "name": "efrei-m2-angular-to-do-list",
   "version": "0.0.0",
   "scripts": {
-    "start:api": "json-server --watch db.json",
+    "start:api": "json-server --watch src/app/db/db.json",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -12,10 +12,12 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
+    "@angular/cdk": "^16.2.14",
     "@angular/common": "^16.2.0",
     "@angular/compiler": "^16.2.0",
     "@angular/core": "^16.2.0",
     "@angular/forms": "^16.2.0",
+    "@angular/material": "^16.2.14",
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",

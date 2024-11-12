@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../services/dashboard.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 import { forkJoin } from 'rxjs';
-import { Contact } from '../models/contact.model';
-import { Category } from '../models/category.model';
+import { Contact } from 'src/app/models/contact.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
   userId: string | null = null;
   contacts: Contact[] = [];
   categories: Category[] = [];
-  groupedContacts: Map<string, Contact[]> = new Map();
+  sortColumn: string = '';
+  sortAscending: boolean = true;
 
   constructor(private dashboardService: DashboardService) {}
 
@@ -38,20 +39,26 @@ export class DashboardComponent implements OnInit {
       contacts: this.dashboardService.getContactsByUserId(userId!),
       categories: this.dashboardService.getCategories(),
     }).subscribe(({ contacts, categories }) => {
-      this.groupedContacts.clear();
-      contacts.forEach((contact) => {
-        const category = categories.find(
+      this.categories = categories;
+      this.contacts = contacts.map((contact) => {
+        contact.category = categories.find(
           (cat) => cat.id === contact.category_id
         ) || { id: '', category_name: 'Autre' };
-
-        contact.category = category;
-
-        const categoryName = contact.category.category_name;
-        if (!this.groupedContacts.has(categoryName)) {
-          this.groupedContacts.set(categoryName, []);
-        }
-        this.groupedContacts.get(categoryName)?.push(contact);
+        return contact;
       });
     });
+  }
+
+  toggleSort(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortAscending = !this.sortAscending;
+    } else {
+      this.sortColumn = column;
+      this.sortAscending = true;
+    }
+  }
+
+  onContactDeleted(): void {
+    this.getContacts();
   }
 }

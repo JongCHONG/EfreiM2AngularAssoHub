@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { DashboardService } from '../services/dashboard.service';
-import { Contact } from '../models/contact.model';
-import { Category } from '../models/category.model';
+import { DashboardService } from 'src/app/services/dashboard.service';
+import { Contact } from 'src/app/models/contact.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-add-contact',
