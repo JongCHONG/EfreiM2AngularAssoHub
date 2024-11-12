@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "id": "b718",
+      "username": "Jong",
+      "email": "jong@test.com",
+      "password": "jong"
+    },
+    {
+      "id": "921f",
+      "username": "maylis",
+      "email": "maylis@test.com",
+      "password": "1234"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "c718",
+      "title": "Jong",
+      "email": "jong@mavoie.org",
+      "category_id": "cat718",
+      "user_Id": "b718"
+    },
+    {
+      "id": "c720",
+      "title": "Resto du coeur",
+      "email": "restoducoeur@test.com",
+      "category_id": "cat719",
+      "user_Id": "b718"
+    },
+    {
+      "id": "c719",
+      "title": "Aaron",
+      "email": "zaron@test.com",
+      "category_id": "cat718",
+      "user_Id": "b718"
+    },
+    {
+      "id": "c721",
+      "title": "Lili",
+      "email": "lili@test.fr",
+      "category_id": "cat718",
+      "user_Id": "921f"
+    },
+    {
+      "id": "c722",
+      "title": "SPA",
+      "email": "spa@test.fr",
+      "category_id": "cat719",
+      "user_Id": "921f"
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat718",
+      "category_name": "Membres"
+    },
+    {
+      "id": "cat719",
+      "category_name": "Partenaires"
+    }
+  ]
+}
