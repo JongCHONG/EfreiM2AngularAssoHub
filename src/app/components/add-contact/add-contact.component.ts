@@ -1,5 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, Output, EventEmitter } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  AbstractControl,
+  ValidatorFn,
+} from '@angular/forms';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { Contact } from 'src/app/models/contact.model';
 import { Category } from 'src/app/models/category.model';
@@ -16,8 +22,16 @@ export class AddContactComponent {
 
   constructor(private dashboardService: DashboardService) {
     this.addContact = new FormGroup({
-      title: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        this.emailExtensionValidator(),
+      ]),
       category_id: new FormControl(''),
     });
   }
@@ -35,6 +49,19 @@ export class AddContactComponent {
     );
   }
 
+  emailExtensionValidator(): ValidatorFn {
+    return (control: AbstractControl): null | { [key: string]: boolean } => {
+      if (!control.value) {
+        return null;
+      }
+
+      const emailRegex = /^[a-zA-Z0-9_%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      const isValid = emailRegex.test(control.value);
+
+      return isValid ? null : { invalidEmailExtension: true };
+    };
+  }
+
   onSubmit() {
     if (this.addContact.valid) {
       const newContact: Contact = this.addContact.value;
@@ -49,6 +76,8 @@ export class AddContactComponent {
           console.error("Erreur lors de l'ajout du contact", error);
         }
       );
+    } else {
+      console.error('Formulaire invalide');
     }
   }
 }

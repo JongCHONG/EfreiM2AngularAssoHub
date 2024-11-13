@@ -7,15 +7,23 @@
             <input type="text" id="title" placeholder="Prénom ou Dénomination du contact" formControlName="title"
                 class="form-control">
             <div *ngIf="addContact.get('title')?.invalid && addContact.get('title')?.touched">
-                Le prénom ou la dénomination du contact est requis.
+                <p *ngIf="addContact.get('title')?.errors?.['required']">Le prénom ou la dénomination du contact est
+                    requis.</p>
+                <p *ngIf="addContact.get('title')?.errors?.['minlength']">Le prénom ou la dénominations doit comporter
+                    minimum 3 caractères.</p>
+                <p *ngIf="addContact.get('title')?.errors?.['maxlength']">Le prénom ou la dénominations doit comporter
+                    maximum 50 caractères.</p>
             </div>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email : </label>
-            <input type="text" id="email" placeholder="Email du contact" formControlName="email"
+            <input type="email" id="email" placeholder="Email du contact" formControlName="email"
                 class="form-control form-control">
             <div *ngIf="addContact.get('email')?.invalid && addContact.get('email')?.touched">
-                L'email du contact est requis.
+                <p *ngIf="addContact.get('email')?.hasError('required')">L'email du contact est requis.</p>
+                <p *ngIf="addContact.get('email')?.hasError('email')">L'email du contact n'est pas valide.</p>
+                <p *ngIf="addContact.get('email')?.hasError('invalidEmailExtension')">L'email du contact doit contenir
+                    une extension après le point (ex: .com).</p>
             </div>
         </div>
         <div class="mb-3">
