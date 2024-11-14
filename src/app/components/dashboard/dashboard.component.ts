@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
       this.categories = categories;
       this.contacts = contacts.map((contact) => {
         contact.category = categories.find(
-          (cat) => cat.id === contact.category_id
+          (cat) => cat.id === contact.category_Id
         ) || { id: '', category_name: 'Autre' };
         return contact;
       });

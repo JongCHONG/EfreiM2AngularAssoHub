@@ -32,7 +32,7 @@ export class AddContactComponent {
         Validators.email,
         this.emailExtensionValidator(),
       ]),
-      category_id: new FormControl(''),
+      category_Id: new FormControl(''),
     });
   }
 
