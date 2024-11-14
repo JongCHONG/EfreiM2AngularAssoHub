@@ -3,6 +3,7 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { forkJoin } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { Category } from 'src/app/models/category.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +19,10 @@ export class DashboardComponent implements OnInit {
   sortColumn: string = '';
   sortAscending: boolean = true;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
@@ -60,5 +64,9 @@ export class DashboardComponent implements OnInit {
 
   onContactDeleted(): void {
     this.getContacts();
+  }
+
+  navigateToContact(contactId: string): void {
+    this.router.navigate(['/contact', contactId]);
   }
 }
