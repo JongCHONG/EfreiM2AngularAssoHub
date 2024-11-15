@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { forkJoin } from 'rxjs';
+import { Contact } from 'src/app/models/contact.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +13,8 @@ export class DashboardComponent implements OnInit {
   errorMessage: string | null = null;
   username: string | null = null;
   userId: string | null = null;
-  contacts: any[] = [];
+  contacts: Contact[] = [];
+  categories: Category[] = [];
   sortColumn: string = '';
   sortAscending: boolean = true;
 
@@ -36,12 +39,12 @@ export class DashboardComponent implements OnInit {
       contacts: this.dashboardService.getContactsByUserId(userId!),
       categories: this.dashboardService.getCategories(),
     }).subscribe(({ contacts, categories }) => {
+      this.categories = categories;
       this.contacts = contacts.map((contact) => {
-        const category = categories.find(
-          (cat) => cat.id === contact.category_id
-        );
-
-        return { ...contact, category };
+        contact.category = categories.find(
+          (cat) => cat.id === contact.category_Id
+        ) || { id: '', category_name: 'Autre' };
+        return contact;
       });
     });
   }

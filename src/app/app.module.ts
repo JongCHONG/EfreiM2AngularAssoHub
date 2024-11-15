@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SubscribeComponent } from './components/subscribe/subscribe.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddContactComponent } from './components/add-contact/add-contact.component';
 import { SortContactsPipe } from './pipes/sort-contacts.pipe';
 import { DeleteContactDirective } from './directives/delete-contact.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,9 +21,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     HomeComponent,
+    DashboardComponent,
     LoginComponent,
     SubscribeComponent,
-    DashboardComponent,
+    AddContactComponent,
     SortContactsPipe,
     DeleteContactDirective,
   ],

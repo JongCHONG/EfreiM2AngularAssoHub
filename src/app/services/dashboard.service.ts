@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Contact } from '../models/contact.model';
-import { Category } from '../models/category.model';
+import { Contact } from 'src/app/models/contact.model';
+import { Category } from 'src/app/models/category.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,15 @@ export class DashboardService {
 
   getContactsByUserId(userId: string): Observable<Contact[]> {
     return this.http.get<Contact[]>(`${this.apiUrlContact}?user_Id=${userId}`);
+  }
+
+  addContact(contact: Contact): Observable<Contact> {
+    const userId = localStorage.getItem('userId');
+
+    if (userId) {
+      contact.user_Id = userId;
+    }
+    return this.http.post<Contact>(this.apiUrlContact, contact);
   }
 
   getCategories(): Observable<Category[]> {
