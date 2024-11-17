@@ -16,11 +16,12 @@
                     class="form-control" [readOnly]="true">
             </div>
             <div class="mb-3">
-                <label for="contentObjet" class="form-label">Objet : </label>
-                <input type="text" id="objet" placeholder="Objet du mail" formControlName="objet" class="form-control">
+                <label for="contentObject" class="form-label">Objet : </label>
+                <input type="text" id="object" placeholder="Objet du mail" formControlName="object"
+                    class="form-control">
             </div>
-            <div *ngIf="contactForm.get('objet')?.invalid && contactForm.get('objet')?.touched">
-                <p *ngIf="contactForm.get('objet')?.errors?.['required']">le contenu du message est
+            <div *ngIf="contactForm.get('object')?.invalid && contactForm.get('object')?.touched">
+                <p *ngIf="contactForm.get('object')?.errors?.['required']">le contenu du message est
                     requis.</p>
             </div>
             <div class="mb-3">
