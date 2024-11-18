@@ -1,43 +1,86 @@
-<div class="col-md-6 mx-auto">
-    <form [formGroup]="addContact" (ngSubmit)="onSubmit()"
-        class="p-4 border rounded shadow-sm bg-light d-flex flex-column">
-        <h5 class="mb-2 text-center">Ajouter un contact</h5>
-        <div class="mb-3">
-            <label for="title" class="from-label" class="form-label">Dénomination : </label>
-            <input type="text" id="title" placeholder="Prénom ou Dénomination du contact" formControlName="title"
-                class="form-control">
-            <div *ngIf="addContact.get('title')?.invalid && addContact.get('title')?.touched">
-                <p *ngIf="addContact.get('title')?.errors?.['required']">Le prénom ou la dénomination du contact est
-                    requis.</p>
-                <p *ngIf="addContact.get('title')?.errors?.['minlength']">Le prénom ou la dénominations doit comporter
-                    minimum 3 caractères.</p>
-                <p *ngIf="addContact.get('title')?.errors?.['maxlength']">Le prénom ou la dénominations doit comporter
-                    maximum 50 caractères.</p>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email : </label>
-            <input type="email" id="email" placeholder="Email du contact" formControlName="email"
-                class="form-control form-control">
-            <div *ngIf="addContact.get('email')?.invalid && addContact.get('email')?.touched">
-                <p *ngIf="addContact.get('email')?.hasError('required')">L'email du contact est requis.</p>
-                <p *ngIf="addContact.get('email')?.hasError('email')">L'email du contact n'est pas valide.</p>
-                <p *ngIf="addContact.get('email')?.hasError('invalidEmailExtension')">L'email du contact doit contenir
-                    une extension après le point (ex: .com).</p>
-            </div>
-        </div>
-        <div class="mb-3">
-            <label for="category" class="form-label">Catégories</label>
-            <select name="category" id="category_Id" formControlName="category_Id" class="form-select"
-                style="width: 35%;">
-                <option *ngFor="let category  of categories" [value]="category.id">
-                    {{ category.category_name }}
-                </option>
-            </select>
-        </div>
-        <div class="d-grid">
-            <button type="submit" class="btn btn-success w-20 p-2 mx-auto"
-                [disabled]="addContact.invalid">Ajouter</button>
-        </div>
-    </form>
-</div>
+<form
+  [formGroup]="addContact"
+  (ngSubmit)="onSubmit()"
+  class="p-4 border rounded shadow-sm bg-light d-flex flex-column"
+>
+  <h2 class="mb-4 text-center">Ajouter un contact</h2>
+  <div class="mb-3">
+    <label for="title" class="from-label" class="form-label"
+      >Dénomination :
+    </label>
+    <input
+      type="text"
+      id="title"
+      placeholder="Prénom ou Dénomination du contact"
+      formControlName="title"
+      class="form-control"
+    />
+    <div
+      *ngIf="
+        addContact.get('title')?.invalid && addContact.get('title')?.touched
+      "
+    >
+      <p *ngIf="addContact.get('title')?.errors?.['required']">
+        Le prénom ou la dénomination du contact est requis.
+      </p>
+      <p *ngIf="addContact.get('title')?.errors?.['minlength']">
+        Le prénom ou la dénominations doit comporter minimum 3 caractères.
+      </p>
+      <p *ngIf="addContact.get('title')?.errors?.['maxlength']">
+        Le prénom ou la dénominations doit comporter maximum 50 caractères.
+      </p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email : </label>
+    <input
+      type="email"
+      id="email"
+      placeholder="Email du contact"
+      formControlName="email"
+      class="form-control form-control"
+    />
+    <div
+      *ngIf="
+        addContact.get('email')?.invalid && addContact.get('email')?.touched
+      "
+    >
+      <p *ngIf="addContact.get('email')?.hasError('required')">
+        L'email du contact est requis.
+      </p>
+      <p *ngIf="addContact.get('email')?.hasError('email')">
+        L'email du contact n'est pas valide.
+      </p>
+      <p *ngIf="addContact.get('email')?.hasError('invalidEmailExtension')">
+        L'email du contact doit contenir une extension après le point (ex:
+        .com).
+      </p>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="category" class="form-label">Catégories</label>
+    <select
+      name="category"
+      id="category_Id"
+      formControlName="category_Id"
+      class="form-select"
+      style="width: 35%"
+    >
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.category_name }}
+      </option>
+    </select>
+  </div>
+  <div class="d-flex justify-content-between">
+    <button
+      type="submit"
+      class="btn btn-success w-20 p-2"
+      [disabled]="addContact.invalid"
+    >
+      Ajouter
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="onCancel()">
+      Cancel
+    </button>
+  </div>
+</form>

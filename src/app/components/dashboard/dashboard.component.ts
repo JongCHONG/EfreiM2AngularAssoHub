@@ -3,6 +3,8 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 import { forkJoin } from 'rxjs';
 import { Contact } from 'src/app/models/contact.model';
 import { Category } from 'src/app/models/category.model';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AddContactComponent } from '../add-contact/add-contact.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,17 +13,19 @@ import { Category } from 'src/app/models/category.model';
 })
 export class DashboardComponent implements OnInit {
   errorMessage: string | null = null;
-  username: string | null = null;
   userId: string | null = null;
   contacts: Contact[] = [];
   categories: Category[] = [];
   sortColumn: string = '';
   sortAscending: boolean = true;
+  public dialogRef?: MatDialogRef<AddContactComponent>; // Injecter MatDialogRef ici
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.username = localStorage.getItem('username');
     this.userId = localStorage.getItem('userId');
     this.getContacts();
   }
@@ -60,5 +64,17 @@ export class DashboardComponent implements OnInit {
 
   onContactDeleted(): void {
     this.getContacts();
+  }
+
+  openAddContactModal(): void {
+    this.dialogRef = this.dialog.open(AddContactComponent, {
+      width: '50%',
+    });
+
+    this.dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.getContacts();
+      }
+    });
   }
 }
