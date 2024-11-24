@@ -31,6 +31,7 @@
           <button class="btn btn-danger" [appDeleteContact]="contact.id" (contactDeleted)="onContactDeleted()">
             Supprimer
           </button>
+          <button class="btn btn-success m-3" (click)="navigateToContact(contact.id)">Contacter</button>
         </td>
       </tr>
     </tbody>
