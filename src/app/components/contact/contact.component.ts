@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailService } from 'src/app/services/email.service';
-import { ContactService } from 'src/app/services/contact.service';
 import { UserService } from 'src/app/services/user.service';
 import { Contact } from 'src/app/models/contact.model';
 import { User } from 'src/app/models/user.model';
 import { EmailData } from 'src/app/models/email-data.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-contact',
@@ -20,60 +19,25 @@ export class ContactComponent {
   contact: Contact | null = null;
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private contactService: ContactService,
     private userService: UserService,
     private emailService: EmailService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: { email: string },
+    public dialogRef?: MatDialogRef<ContactComponent>
   ) {
     this.contactForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: [this.data?.email || '', [Validators.required, Validators.email]],
       object: ['', [Validators.required]],
       contentEmail: ['', [Validators.required]],
     });
   }
 
   ngOnInit(): void {
-    const contactId = this.activatedRoute.snapshot.paramMap.get('id');
-    if (contactId) {
-      this.getContactDetails(contactId);
-    }
-
-    this.getUser();
+    this.getCurrentUser();
   }
 
-  getContactDetails(id: string): void {
-    this.contactService.getContactById(id).subscribe(
-      (contact) => {
-        this.contact = contact;
-        this.prefillForm(contact);
-      },
-      (error) => {
-        console.error(error);
-        this.snackBar.open(
-          'Erreur de la récupération des informations du contact',
-          'Fermer',
-          {
-            duration: 3000,
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-          }
-        );
-      }
-    );
-  }
-
-  prefillForm(contact: Contact): void {
-    this.contactForm.patchValue({
-      email: contact.email,
-      object: '',
-      contentEmail: '',
-    });
-  }
-
-  getUser(): void {
+  getCurrentUser(): void {
     this.userService.getCurrentUser().subscribe(
       (user) => {
         this.user = user;
@@ -84,7 +48,7 @@ export class ContactComponent {
           "Erreur lors de la récupération de l'utilisateur",
           'Fermer',
           {
-            duration: 3000,
+            duration: 5000,
             verticalPosition: 'top',
             horizontalPosition: 'center',
           }
@@ -108,7 +72,7 @@ export class ContactComponent {
           console.log('Email envoyé avec succès', response);
 
           this.snackBar.open('Email envoyé avec succès', 'Fermer', {
-            duration: 3000,
+            duration: 5000,
             verticalPosition: 'top',
             horizontalPosition: 'center',
           });
@@ -116,7 +80,7 @@ export class ContactComponent {
         (error) => {
           console.error("Erreur lors de l'envoi de l'email", error);
           this.snackBar.open("Erreur lors de l'envoi de l'email", 'Fermer', {
-            duration: 3000,
+            duration: 5000,
             verticalPosition: 'top',
             horizontalPosition: 'center',
           });
@@ -127,7 +91,7 @@ export class ContactComponent {
         "Le formulaire est invalide ou l'utilisateur n'est pas connecté",
         'Fermer',
         {
-          duration: 3000,
+          duration: 5000,
           verticalPosition: 'top',
           horizontalPosition: 'center',
         }
@@ -135,7 +99,9 @@ export class ContactComponent {
     }
   }
 
-  navigateToContactList(): void {
-    this.router.navigate(['/dashboard']);
+  onCancel(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close();
+    }
   }
 }

@@ -11,6 +11,18 @@
       "username": "maylis",
       "email": "maylis@test.com",
       "password": "1234"
+    },
+    {
+      "id": "c138",
+      "username": "gege",
+      "email": "gege@test.com",
+      "password": "gege"
+    },
+    {
+      "id": "5aff",
+      "username": "zomboy",
+      "email": "zomboy@test.com",
+      "password": "zomboy"
     }
   ],
   "contacts": [
@@ -54,6 +66,27 @@
       "email": "test@gmail.com",
       "user_Id": "921f",
       "id": "1dc4pC4"
+    },
+    {
+      "id": "e74e",
+      "title": "Paul",
+      "email": "test@test.com",
+      "category_Id": "cat718",
+      "user_Id": "b718"
+    },
+    {
+      "id": "02ed",
+      "title": "Sacha",
+      "email": "test@test.com",
+      "category_Id": "cat718",
+      "user_Id": "b718"
+    },
+    {
+      "id": "a488",
+      "title": "James",
+      "email": "test@test.com",
+      "category_Id": "cat718",
+      "user_Id": "b718"
     }
   ],
   "categories": [

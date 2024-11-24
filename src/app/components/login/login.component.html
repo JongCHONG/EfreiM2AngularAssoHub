@@ -2,7 +2,7 @@
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
   class="container mt-5 p-4 border rounded shadow-sm bg-light"
-  style="max-width: 300px"
+  style="min-width: 300px"
 >
   <div class="mb-3">
     <label for="email" class="form-label fw-bold">Email:</label>
@@ -12,7 +12,22 @@
       formControlName="email"
       required
       class="form-control"
+      [ngClass]="{
+        'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched,
+        'is-valid': loginForm.get('email')?.valid && loginForm.get('email')?.touched
+      }"
     />
+    <div
+      *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+      class="text-danger"
+    >
+      <div class="mt-1" *ngIf="loginForm.get('email')?.errors?.['required']">
+        L'email est requis.
+      </div>
+      <div class="mt-1" *ngIf="loginForm.get('email')?.errors?.['email']">
+        L'email n'est pas valide.
+      </div>
+    </div>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label fw-bold">Mot de passe:</label>
@@ -22,7 +37,19 @@
       formControlName="password"
       required
       class="form-control"
+      [ngClass]="{
+        'is-invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched,
+        'is-valid': loginForm.get('password')?.valid && loginForm.get('password')?.touched
+      }"
     />
+    <div
+      *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+      class="text-danger"
+    >
+      <div class="mt-1" *ngIf="loginForm.get('password')?.errors?.['required']">
+        Le mot de passe est requis.
+      </div>
+    </div>
   </div>
   <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   <button type="submit" class="btn btn-primary w-100">Connexion</button>
