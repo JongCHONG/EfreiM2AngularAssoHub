@@ -5,6 +5,8 @@ import { Contact } from 'src/app/models/contact.model';
 import { Category } from 'src/app/models/category.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddContactComponent } from '../add-contact/add-contact.component';
+import { Router } from '@angular/router';
+import { ContactComponent } from '../contact/contact.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +25,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     private dialog: MatDialog
-  ) {}
+  ) // private router: Router
+  {}
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
@@ -72,6 +75,19 @@ export class DashboardComponent implements OnInit {
     });
 
     this.dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        this.getContacts();
+      }
+    });
+  }
+
+  openContactModal(email: string): void {
+    const dialogRef = this.dialog.open(ContactComponent, {
+      width: '50%',
+      data: { email },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
         this.getContacts();
       }

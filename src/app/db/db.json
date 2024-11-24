@@ -11,6 +11,18 @@
       "username": "maylis",
       "email": "maylis@test.com",
       "password": "1234"
+    },
+    {
+      "id": "c138",
+      "username": "gege",
+      "email": "gege@test.com",
+      "password": "gege"
+    },
+    {
+      "id": "5aff",
+      "username": "zomboy",
+      "email": "zomboy@test.com",
+      "password": "zomboy"
     }
   ],
   "contacts": [
@@ -70,10 +82,10 @@
       "user_Id": "b718"
     },
     {
-      "id": "3e0f",
-      "title": "Tom",
+      "id": "a488",
+      "title": "James",
       "email": "test@test.com",
-      "category_Id": "",
+      "category_Id": "cat718",
       "user_Id": "b718"
     }
   ],

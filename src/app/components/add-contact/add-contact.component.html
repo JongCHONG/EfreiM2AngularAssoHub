@@ -5,46 +5,44 @@
 >
   <h2 class="mb-4 text-center">Ajouter un contact</h2>
   <div class="mb-3">
-    <label for="title" class="from-label" class="form-label"
-      >Dénomination :
-    </label>
+    <label for="title" class="form-label">Dénomination :</label>
     <input
       type="text"
       id="title"
       placeholder="Prénom ou Dénomination du contact"
       formControlName="title"
       class="form-control"
+      [ngClass]="{
+        'is-invalid': addContact.get('title')?.invalid && addContact.get('title')?.touched,
+        'is-valid': addContact.get('title')?.valid && addContact.get('title')?.touched
+      }"
     />
-    <div
-      *ngIf="
-        addContact.get('title')?.invalid && addContact.get('title')?.touched
-      "
-    >
+    <div *ngIf="addContact.get('title')?.invalid && addContact.get('title')?.touched" class="text-danger">
       <p *ngIf="addContact.get('title')?.errors?.['required']">
         Le prénom ou la dénomination du contact est requis.
       </p>
       <p *ngIf="addContact.get('title')?.errors?.['minlength']">
-        Le prénom ou la dénominations doit comporter minimum 3 caractères.
+        Le prénom ou la dénomination doit comporter minimum 3 caractères.
       </p>
       <p *ngIf="addContact.get('title')?.errors?.['maxlength']">
-        Le prénom ou la dénominations doit comporter maximum 50 caractères.
+        Le prénom ou la dénomination doit comporter maximum 50 caractères.
       </p>
     </div>
   </div>
   <div class="mb-3">
-    <label for="email" class="form-label">Email : </label>
+    <label for="email" class="form-label">Email :</label>
     <input
       type="email"
       id="email"
       placeholder="Email du contact"
       formControlName="email"
-      class="form-control form-control"
+      class="form-control"
+      [ngClass]="{
+        'is-invalid': addContact.get('email')?.invalid && addContact.get('email')?.touched,
+        'is-valid': addContact.get('email')?.valid && addContact.get('email')?.touched
+      }"
     />
-    <div
-      *ngIf="
-        addContact.get('email')?.invalid && addContact.get('email')?.touched
-      "
-    >
+    <div *ngIf="addContact.get('email')?.invalid && addContact.get('email')?.touched" class="text-danger">
       <p *ngIf="addContact.get('email')?.hasError('required')">
         L'email du contact est requis.
       </p>
@@ -52,8 +50,7 @@
         L'email du contact n'est pas valide.
       </p>
       <p *ngIf="addContact.get('email')?.hasError('invalidEmailExtension')">
-        L'email du contact doit contenir une extension après le point (ex:
-        .com).
+        L'email du contact doit contenir une extension après le point (ex: .com).
       </p>
     </div>
   </div>
@@ -65,6 +62,10 @@
       formControlName="category_Id"
       class="form-select"
       style="width: 35%"
+      [ngClass]="{
+        'is-invalid': addContact.get('category_Id')?.invalid && addContact.get('category_Id')?.touched,
+        'is-valid': addContact.get('category_Id')?.valid && addContact.get('category_Id')?.touched
+      }"
     >
       <option *ngFor="let category of categories" [value]="category.id">
         {{ category.category_name }}
@@ -80,7 +81,7 @@
       Ajouter
     </button>
     <button type="button" class="btn btn-secondary" (click)="onCancel()">
-      Cancel
+      Fermer
     </button>
   </div>
 </form>
