@@ -19,6 +19,7 @@ import { SortContactsPipe } from './pipes/sort-contacts.pipe';
 import { DeleteContactDirective } from './directives/delete-contact.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './components/contact/contact.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ContactComponent } from './components/contact/contact.component';
     SortContactsPipe,
     DeleteContactDirective,
     ContactComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
