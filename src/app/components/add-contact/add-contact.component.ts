@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Optional } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -9,6 +9,7 @@ import {
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { Contact } from 'src/app/models/contact.model';
 import { Category } from 'src/app/models/category.model';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-contact',
@@ -20,7 +21,10 @@ export class AddContactComponent {
   categories: Category[] = [];
   @Output() contactAdded = new EventEmitter<Contact>();
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, 
+    @Optional() private dialogRef: MatDialogRef<AddContactComponent>, // Injection conditionnelle
+
+  ) {
     this.addContact = new FormGroup({
       title: new FormControl('', [
         Validators.required,
@@ -71,13 +75,20 @@ export class AddContactComponent {
           console.log('Contact ajouté avec succès', response);
           this.contactAdded.emit(response);
           this.addContact.reset({ category_id: '' });
+          this.dialogRef?.close(true); // Renvoie un résultat "true" pour indiquer le succès
         },
-        (error) => {
+        (error: any) => {
           console.error("Erreur lors de l'ajout du contact", error);
         }
       );
     } else {
       console.error('Formulaire invalide');
+    }
+  }
+
+  onCancel(): void {
+    if (this.dialogRef) {
+      this.dialogRef.close(false); // Ferme uniquement si utilisé comme modal
     }
   }
 }

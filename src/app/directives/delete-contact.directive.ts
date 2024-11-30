@@ -15,7 +15,7 @@ export class DeleteContactDirective {
     if (confirm('Êtes-vous sûr de vouloir supprimer ce contact ?')) {
       this.dashboardService.deleteContact(this.contactId).subscribe(() => {
         this.snackBar.open('Contact supprimé avec succès', 'Fermer', {
-          duration: 3000,
+          duration: 5000,
           verticalPosition: 'top', // Position en haut
           horizontalPosition: 'center' // Position centrée horizontalement
         });

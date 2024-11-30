@@ -1,12 +1,14 @@
 <div class="container" style="width: 80%">
   <div class="d-flex justify-content-between mb-3">
-    <h1>Bienvenue, {{ username }}</h1>
-    <button (click)="logout()" class="btn btn-primary">Deconnexion</button>
+    <h2 class="mb-4 text-muted">Liste des contacts</h2>
+
+    <div>
+      <button (click)="openAddContactModal()" class="btn btn-success me-2">
+        Ajouter un contact
+      </button>
+      <button (click)="logout()" class="btn btn-primary">Deconnexion</button>
+    </div>
   </div>
-
-  <h5 class="mb-4 text-muted">Liste des contacts</h5>
-
-  <app-add-contact></app-add-contact>
 
   <table class="table table-striped">
     <thead>
@@ -18,25 +20,48 @@
       </tr>
     </thead>
     <tbody *ngIf="contacts.length > 0; else emptyContactList">
-      <tr *ngFor="
+      <tr
+        *ngFor="
           let contact of contacts | sortContacts : sortColumn : sortAscending
-        " class="align-middle">
+        "
+        class="align-middle"
+      >
         <td>{{ contact.category.category_name }}</td>
         <td>
           {{ contact.title }}
         </td>
         <td>{{ contact.email }}</td>
         <td>
-          <button class="btn btn-primary me-3">Modifier</button>
-          <button class="btn btn-danger" [appDeleteContact]="contact.id" (contactDeleted)="onContactDeleted()">
-            Supprimer
-          </button>
+          <!-- <button class="btn btn-primary me-3">
+            <div style="display: flex; justify-content: center">
+              <mat-icon>edit</mat-icon>
+            </div>
+          </button> -->
+          <button
+          class="btn btn-success m-3"
+          (click)="openContactModal(contact.email)"
+          >
+          <div class="d-flex justify-content-center">
+            <mat-icon>mail_outline</mat-icon>
+          </div>
+        </button>
+        <button
+          class="btn btn-danger"
+          [appDeleteContact]="contact.id"
+          (contactDeleted)="onContactDeleted()"
+        >
+          <div class="d-flex justify-content-center">
+            <mat-icon>delete</mat-icon>
+          </div>
+        </button>
         </td>
       </tr>
     </tbody>
   </table>
 
   <ng-template #emptyContactList>
-    <p class="text-center">Votre liste de contact est vide ...</p>
+    <div class="d-flex justify-content-center align-items-center w-100" style="height: 200px;">
+      Votre liste de contact est vide ...
+    </div>
   </ng-template>
 </div>

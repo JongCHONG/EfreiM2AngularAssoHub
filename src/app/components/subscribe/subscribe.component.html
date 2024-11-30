@@ -2,7 +2,7 @@
   [formGroup]="subscribeForm"
   (ngSubmit)="addUser()"
   class="container mt-5 p-4 border rounded shadow-sm bg-light"
-  style="max-width: 400px"
+  style="min-width: 400px"
 >
   <div class="mb-3">
     <label for="username" class="form-label fw-bold">Nom:</label>
@@ -12,7 +12,26 @@
       formControlName="username"
       required
       class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          subscribeForm.get('username')?.invalid &&
+          subscribeForm.get('username')?.touched,
+        'is-valid':
+          subscribeForm.get('username')?.valid &&
+          subscribeForm.get('username')?.touched
+      }"
     />
+    <div
+      *ngIf="
+        subscribeForm.get('username')?.invalid &&
+        subscribeForm.get('username')?.touched
+      "
+      class="text-danger"
+    >
+      <div class="mt-1" *ngIf="subscribeForm.get('username')?.errors?.['required']">
+        Le nom est requis.
+      </div>
+    </div>
   </div>
 
   <div class="mb-3">
@@ -23,7 +42,29 @@
       formControlName="email"
       required
       class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          subscribeForm.get('email')?.invalid &&
+          subscribeForm.get('email')?.touched,
+        'is-valid':
+          subscribeForm.get('email')?.valid &&
+          subscribeForm.get('email')?.touched
+      }"
     />
+    <div
+      *ngIf="
+        subscribeForm.get('email')?.invalid &&
+        subscribeForm.get('email')?.touched
+      "
+      class="text-danger"
+    >
+      <div class="mt-1" *ngIf="subscribeForm.get('email')?.errors?.['required']">
+        L'email est requis.
+      </div>
+      <div class="mt-1" *ngIf="subscribeForm.get('email')?.errors?.['email']">
+        L'email n'est pas valide.
+      </div>
+    </div>
   </div>
 
   <div class="mb-3">
@@ -34,10 +75,29 @@
       formControlName="password"
       required
       class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          subscribeForm.get('password')?.invalid &&
+          subscribeForm.get('password')?.touched,
+        'is-valid':
+          subscribeForm.get('password')?.valid &&
+          subscribeForm.get('password')?.touched
+      }"
     />
+    <div
+      *ngIf="
+        subscribeForm.get('password')?.invalid &&
+        subscribeForm.get('password')?.touched
+      "
+      class="text-danger"
+    >
+      <div class="mt-1" *ngIf="subscribeForm.get('password')?.errors?.['required']">
+        Le mot de passe est requis.
+      </div>
+    </div>
   </div>
 
-  <div class="mb-3">
+  <div class="mt-1" class="mb-3">
     <label for="confirm-password" class="form-label fw-bold"
       >Confirmer Mot de passe:</label
     >
@@ -47,8 +107,28 @@
       formControlName="confirmPassword"
       required
       class="form-control"
+      [ngClass]="{
+        'is-invalid':
+          subscribeForm.get('confirmPassword')?.invalid &&
+          subscribeForm.get('confirmPassword')?.touched,
+        'is-valid':
+          subscribeForm.get('confirmPassword')?.valid &&
+          subscribeForm.get('confirmPassword')?.touched
+      }"
     />
+    <div
+      *ngIf="
+        subscribeForm.get('confirmPassword')?.invalid &&
+        subscribeForm.get('confirmPassword')?.touched
+      "
+      class="text-danger"
+    >
+      <div class="mt-1" *ngIf="subscribeForm.get('confirmPassword')?.errors?.['required']">
+        La confirmation du mot de passe est requise.
+      </div>
+    </div>
   </div>
+
   <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-  <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+  <app-button type="submit" label="S'inscrire" class="btn btn-primary w-100"></app-button>
 </form>

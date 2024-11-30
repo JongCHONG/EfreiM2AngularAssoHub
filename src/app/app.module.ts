@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -16,6 +18,8 @@ import { AddContactComponent } from './components/add-contact/add-contact.compon
 import { SortContactsPipe } from './pipes/sort-contacts.pipe';
 import { DeleteContactDirective } from './directives/delete-contact.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ContactComponent } from './components/contact/contact.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddContactComponent,
     SortContactsPipe,
     DeleteContactDirective,
+    ContactComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +43,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
